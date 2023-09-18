@@ -1,0 +1,27 @@
+using System.Text.Json.Serialization;
+using NpgsqlTypes;
+
+namespace todolistasp.Models
+{
+    public class Review : BaseModel
+    {
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public Rating Rating { get; set; }
+        public int UserId { get; set; }
+        public int ProductId { get; set; }
+        public User User { get; set; } = null!;
+        public Product Product { get; set; } = null!;
+    }
+
+    [PgName("rating")]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum Rating
+    {
+        One = 1,
+        Two,
+        Three,
+        Four,
+        Five
+    }
+}
